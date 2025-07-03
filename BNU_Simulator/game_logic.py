@@ -210,4 +210,4 @@ class GameLogic:
         with open(csv_path, 'w', newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=headers)
             writer.writeheader()
-            writer.writerows(self.player_history)S
+            writer.writerows(self.player_history)
