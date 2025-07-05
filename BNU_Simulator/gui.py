@@ -4,7 +4,7 @@ from game_engine import GameEngine
 import matplotlib
 matplotlib.use('TkAgg')  # 确保matplotlib使用TkAgg后端
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-
+'''hahhg'''
 class StudySimulatorGUI:
     def __init__(self, root):
         self.root = root
