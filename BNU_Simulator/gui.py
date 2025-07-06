@@ -9,7 +9,7 @@ class StudySimulatorGUI:
     def __init__(self, root):
         self.root = root
         self.engine = GameEngine()
-        self.root.title("大学生活模拟器")
+        self.root.title("BNU-AIer的北师人生")
         self.root.geometry("800x600")
         self.setup_ui()
         self.update_status()
@@ -56,7 +56,8 @@ class StudySimulatorGUI:
         
         # 添加状态信息
         p = self.engine.player
-        ttk.Label(self.status_frame, text=f"学年: 大{p.year}").pack(side=tk.LEFT, padx=10)
+        num_trans = {1:"一",2:"二",3:"三",4:"四"}
+        ttk.Label(self.status_frame, text=f"学年: 大{num_trans[p.year]}").pack(side=tk.LEFT, padx=10)
         ttk.Label(self.status_frame, text=f"学分: {p.credits}/{self.engine.course_system.total_credits_needed}").pack(side=tk.LEFT, padx=10)
         ttk.Label(self.status_frame, text=f"健康: {p.health}").pack(side=tk.LEFT, padx=10)
         ttk.Label(self.status_frame, text=f"魅力: {p.charm}").pack(side=tk.LEFT, padx=10)
@@ -67,6 +68,7 @@ class StudySimulatorGUI:
     def add_log(self, message):
         self.log_text.config(state=tk.NORMAL)
         self.log_text.insert(tk.END, message + "\n")
+        self.log_text.insert(tk.END, "-"*50 + "\n")
         self.log_text.config(state=tk.DISABLED)
         self.log_text.see(tk.END)
     
@@ -89,6 +91,9 @@ class StudySimulatorGUI:
             else:
                 self.update_status()
                 self.show_course_selection()
+        
+        elif self.engine.state == "EVENT_HANDLING":
+            self.show_event
     
     def clear_action_panel(self):
         for widget in self.action_frame.winfo_children():
@@ -190,7 +195,14 @@ class StudySimulatorGUI:
     def handle_event_choice(self, choice_idx):
         self.add_log(self.engine.handle_event_choice(choice_idx))
         self.update_status()
-        self.clear_action_panel()
+        
+        # 修改：检查是否还有事件
+        if self.engine.state == "EVENT_HANDLING":
+            self.show_event()
+        else:
+            self.clear_action_panel()
+            # 启用继续按钮进入下一年
+            self.next_btn.config(state=tk.NORMAL)
     
     def show_game_over(self):
         self.clear_action_panel()
