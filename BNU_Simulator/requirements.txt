@@ -3,3 +3,5 @@ numpy
 pillow
 matplotlib
 scikit-learn
+requests
+python-dotenv
