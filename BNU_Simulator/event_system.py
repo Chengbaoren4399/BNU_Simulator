@@ -23,3 +23,18 @@ class EventSystem:
             return None
             
         return random.choice(applicable_events)
+    
+    # 新增方法：获取多个不重复的随机事件
+    def get_non_repeating_events(self, year, count=10):
+        """获取指定数量的不重复随机事件"""
+        applicable_events = [e for e in self.events if 'years' in e and year in e['years']]
+        
+        if not applicable_events:
+            print(f"没有找到适用于学年 {year} 的事件")
+            return []
+        
+        # 确保不超过可用事件总数
+        count = min(count, len(applicable_events))
+        
+        # 随机选择不重复的事件
+        return random.sample(applicable_events, count)
