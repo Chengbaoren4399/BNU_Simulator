@@ -5,8 +5,8 @@
     "event_type": "学业",
     "description": "线性代数期中考试临近，你需要准备复习",
     "choices": [
-      {"description": "每天复习4小时", "effects": {"wisdom": 5, "pressure": 3, "health": -2}},
-      {"description": "临时抱佛脚", "effects": {"wisdom": 2, "pressure": 5}},
+      {"description": "每天复习4小时", "effects": {"wisdom": 3, "pressure": 3, "health": -2}},
+      {"description": "临时抱佛脚", "effects": {"wisdom": 1, "pressure": 5}},
       {"description": "放弃考试", "effects": {"wisdom": -5, "pressure": -3}}
     ]
   },
@@ -16,8 +16,8 @@
     "years":[2,3,4],
     "description": "教授邀请你参与科研项目",
     "choices": [
-      {"description": "接受邀请", "effects": {"wisdom": 8, "pressure": 6}},
-      {"description": "婉拒邀请", "effects": {"wisdom": 0, "pressure": -2}},
+      {"description": "接受邀请", "effects": {"wisdom": 5, "pressure": 6}},
+      {"description": "婉拒邀请", "effects": {"wisdom": -1, "pressure": -2}},
       {"description": "尝试参与但中途退出", "effects": {"wisdom": 3, "pressure": 4}}
     ]
   },
@@ -218,5 +218,314 @@
       {"description": "主动提出上台汇报", "effects": {"charm":2, "wisdom":3,"pressure": 3}},
       {"description": "摆烂", "effects": {"charm":-2, "wisdom":-2,"pressure": -1}}
     ]
+  },
+  {
+    "event_id": 21,
+    "years": [1,2,3,4],
+    "event_type": "学业",
+    "description": "京师学堂举办'人工智能与教育未来'讲座，但和你选的'教育心理学'课程时间冲突",
+    "choices": [
+      {
+        "description": "翘课去听讲座",
+        "effects": {"wisdom": 5, "pressure": 3}
+      },
+      {
+        "description": "录下讲座课后补看",
+        "effects": {"wisdom": 3, "pressure": 1}
+      },
+      {
+        "description": "请同学帮忙录音",
+        "effects": {"charm": 2, "pressure": -1}
+      }
+    ]
+  },
+  {
+    "event_id": 22,
+    "years": [1,2,3,4],
+    "event_type": "学业",
+    "description": "你发现教九楼后的小花园是晨读圣地，但需要早起",
+    "choices": [
+      {
+        "description": "每天6点晨读",
+        "effects": {"wisdom": 5, "health": -2}
+      },
+      {
+        "description": "周末去晨读",
+        "effects": {"wisdom": 3, "pressure": -1}
+      },
+      {
+        "description": "在宿舍学习",
+        "effects": {"wisdom": 1, "pressure": -2}
+      }
+    ]
+  },
+  {
+    "event_id": 23,
+    "years": [1,2,3,4],
+    "event_type": "生活",
+    "description": "在后主楼图书馆，你的座位被人占了",
+    "choices": [
+      {
+        "description": "礼貌理论",
+        "effects": {"charm": 3, "pressure": 1}
+      },
+      {
+        "description": "找管理员处理",
+        "effects": {"wisdom": 2, "pressure": -1}
+      },
+      {
+        "description": "换个地方学习",
+        "effects": {"wisdom": -1, "pressure": -1}
+      }
+    ]
+  },
+  {
+    "event_id": 24,
+    "years": [1,2,3,4],
+    "event_type": "生活",
+    "description": "在后主楼图书馆，你的座位被人占了",
+    "choices": [
+      {
+        "description": "礼貌理论",
+        "effects": {"charm": 3, "pressure": 1}
+      },
+      {
+        "description": "找管理员处理",
+        "effects": {"wisdom": 2, "pressure": -1}
+      },
+      {
+        "description": "换个地方学习",
+        "effects": {"wisdom": -1, "pressure": -1}
+      }
+    ]
+  },
+  {
+    "event_id": 25,
+    "years": [1,2,3,4],
+    "event_type": "生活",
+    "description": "发现小猫在教二楼附近受伤",
+    "choices": [
+      {
+        "description": "送宠物医院",
+        "effects": {"wisdom": 3, "pressure": -1}
+      },
+      {
+        "description": "联系相关社团",
+        "effects": {"wisdom": 3, "charm": 2}
+      },
+      {
+        "description": "拍照发求助帖",
+        "effects": {"charm": 1, "pressure": -1}
+      }
+    ]
+  },
+  {
+    "event_id": 26,
+    "years": [1,2,3,4],
+    "event_type": "生活",
+    "description": "校史馆正在选拔讲解员",
+    "choices": [
+      {
+        "description": "积极报名",
+        "effects": {"wisdom": 2, "charm": 2}
+      },
+      {
+        "description": "当观众学习",
+        "effects": {"wisdom": 3, "pressure": -1}
+      },
+      {
+        "description": "觉得没意思",
+        "effects": {"charm": -1, "pressure": -2}
+      }
+    ]
+  },
+  {
+    "event_id": 27,
+    "years": [1,2,3,4],
+    "event_type": "生活",
+    "description": "心理学院招募实验参与者，有被试费",
+    "choices": [
+      {
+        "description": "报名参加",
+        "effects": {"wisdom": 3, "pressure": -1}
+      },
+      {
+        "description": "推荐给朋友",
+        "effects": {"charm": 2}
+      },
+      {
+        "description": "担心隐私不参与",
+        "effects": {"wisdom": -1, "pressure": -1}
+      }
+    ]
+  },
+
+  {
+    "event_id": 28,
+    "years": [1,2,3,4],
+    "event_type": "学业",
+    "description": "教九楼自习室爆满，你发现教二楼的空教室很适合学习",
+    "choices": [
+      {"description": "坚持去教九楼找座位", "effects": {"wisdom": 2, "pressure": 2}},
+      {"description": "转战教二楼自习", "effects": {"wisdom": 3, "health": -1}},
+      {"description": "回宿舍学习", "effects": {"wisdom": 1, "pressure": -2}}
+    ]
+  },
+  {
+    "event_id": 29,
+    "years": [1,2,3,4],
+    "event_type": "健康",
+    "description": "舍友邀请你去邱季端体育馆打羽毛球",
+    "choices": [
+      {"description": "和对方一起前往邱季端并积极对待", "effects": {"charm": 3, "health": 2,"pressure":-1}},
+      {"description": "找借口委婉拒绝", "effects": {"charm": -1, "health":-1}},
+      {"description": "答应但过程敷衍了事", "effects": {"charm":-2}}
+    ]
+  },
+  {
+    "event_id": 30,
+    "years": [3,4],
+    "event_type": "学业",
+    "description": "导师建议你参加'十佳大学生'评选",
+    "choices": [
+      {"description": "精心准备材料参选", "effects": {"charm": 5, "wisdom": 3, "pressure": 4}},
+      {"description": "简单提交材料应付", "effects": {"wisdom":-1,"charm": 2, "pressure": 2}},
+      {"description": "婉拒评选机会", "effects": {"wisdom":-2,"charm": -2, "pressure": -3}}
+    ]
+  },
+  {
+    "event_id": 31,
+    "years": [1,2,3,4],
+    "event_type": "生活",
+    "description": "京师学堂举办国际文化节，各国美食摊位琳琅满目",
+    "choices": [
+      {"description": "品尝各国美食", "effects": {"health": 2, "charm": 3}},
+      {"description": "只看不吃拍照打卡", "effects": {"charm": 2}},
+      {"description": "专心学习不参与", "effects": {"wisdom": 1}}
+    ]
+  },
+  {
+    "event_id": 32,
+    "years": [1,2,3,4],
+    "event_type": "健康",
+    "description": "操场夜跑时遇到校园跑团",
+    "choices": [
+      {"description": "加入跑团一起锻炼", "effects": {"health": 4, "charm": 2}},
+      {"description": "自己继续单独跑步", "effects": {"health": 2}},
+      {"description": "放弃跑步回宿舍", "effects": {"health": -1, "pressure": -1}}
+    ]
+  },
+  {
+    "event_id": 33,
+    "years": [2,3,4],
+    "event_type": "学业",
+    "description": "图书馆推出'古籍修复体验'活动",
+    "choices": [
+      {"description": "积极参与体验", "effects": {"wisdom": 4, "charm": 2}},
+      {"description": "旁观不参与", "effects": {"wisdom": -2}},
+      {"description": "觉得没意思离开", "effects": {"pressure": -3}}
+    ]
+  },
+  {
+    "event_id": 34,
+    "years": [1,2,3,4],
+    "event_type": "生活",
+    "description": "西操场上有人正在唱歌，氛围浪漫",
+    "choices": [
+      {"description": "驻足欣赏并鼓掌", "effects": {"charm": 3, "pressure": -1}},
+      {"description": "加入合唱", "effects": {"charm": 5, "pressure": 2}},
+      {"description": "快速通过避免尴尬", "effects": {"pressure": -2}}
+    ]
+  },
+  {
+    "event_id": 35,
+    "years": [3,4],
+    "event_type": "学业",
+    "description": "面临考研和就业的选择困境",
+    "choices": [
+      {"description": "决定考研深造", "effects": {"wisdom": 4, "pressure": 4}},
+      {"description": "准备就业找工作", "effects": {"charm": 4, "pressure": 3}},
+      {"description": "申请保研资格", "effects": {"wisdom": 5, "pressure": 5}}
+    ]
+  },
+  {
+    "event_id": 36,
+    "years": [2,3],
+    "event_type": "生活",
+    "description": "木铎金声艺术团招募新成员",
+    "choices": [
+      {"description": "报名参加面试", "effects": {"charm": 5, "pressure": 3}},
+      {"description": "做幕后工作人员", "effects": {"charm": 3, "wisdom": 2}},
+      {"description": "不参与艺术活动", "effects": {"wisdom":-1,"pressure": -2}}
+    ]
+  },
+  {
+    "event_id": 37,
+    "years": [1,2,3,4],
+    "event_type": "健康",
+    "description": "连续熬夜导致身体不适，校医院医生建议休息",
+    "choices": [
+      {"description": "遵医嘱休息两天", "effects": {"health": 5, "wisdom": -1}},
+      {"description": "坚持带病学习", "effects": {"health": -3, "wisdom": 2}},
+      {"description": "减少工作量适度休息", "effects": {"health": 3, "wisdom": 1}}
+    ]
+  },
+  {
+    "event_id": 38,
+    "years": [1,2],
+    "event_type": "学业",
+    "description": "新生研讨课要求做创意展示",
+    "choices": [
+      {"description": "精心准备创新展示", "effects": {"wisdom": 4, "charm": 3}},
+      {"description": "做常规展示", "effects": {"wisdom": 2}},
+      {"description": "应付了事", "effects": {"wisdom": -3, "pressure": -1}}
+    ]
+  },
+  {
+    "event_id": 39,
+    "years": [1,2,3,4],
+    "event_type": "社交",
+    "description": "校友返校日在主楼举行，各界成功校友分享经验",
+    "choices": [
+      {"description": "积极提问交流", "effects": {"wisdom": 4, "charm": 3}},
+      {"description": "认真听讲做笔记", "effects": {"wisdom": 3}},
+      {"description": "觉得无聊提前离开", "effects": {"wisdom": -3,"pressure": -1}}
+    ]
+  },
+  {
+    "event_id": 40,
+    "years": [4],
+    "event_type": "学业",
+    "description": "毕业季来临，你因为论文而头疼不已",
+    "choices": [
+      {"description": "自己努力克服困难", "effects": {"wisdom":3, "pressure": 2}},
+      {"description": "拖延敷衍了事", "effects": {"wisdom":-3,"pressure": 2}},
+      {"description": "找学习搭子一起解决", "effects": {"wisdom": 3, "pressure": 2,"charm":2}}
+    ]
+  },
+  {
+    "event_id": 41,
+    "years": [1,2,3,4],
+    "event_type": "健康",
+    "description": "北京雾霾严重，学校建议减少户外活动",
+    "choices": [
+      {"description": "购买防霾口罩出行", "effects": {"health": 2, "pressure": 1}},
+      {"description": "待在室内不外出", "effects": {"health": 1, "pressure": 2}},
+      {"description": "无视建议正常活动", "effects": {"wisdom":-2,"health": -3}}
+    ]
+  },
+  {
+    "event_id": 42,
+    "years": [2,3,4],
+    "event_type": "学业",
+    "description": "教育学部推出'未来教师'工作坊",
+    "choices": [
+      {"description": "报名参加培训", "effects": {"wisdom": 5, "pressure": 3}},
+      {"description": "旁听学习", "effects": {"wisdom": 3, "pressure": 1}},
+      {"description": "不感兴趣", "effects": {"wisdom": -3,"pressure": -1}}
+    ]
   }
+
 ]
+    
+
