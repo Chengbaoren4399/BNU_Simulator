@@ -5,6 +5,9 @@ class CourseSystem:
     def __init__(self, filename="data/courses.csv"):
         self.courses = self.load_courses(filename)
         self.total_credits_needed = 155
+        self.required_credits_needed = 124  # 必修课所需学分
+        self.electiveI_credits_needed = 20  # 专业选修I所需学分
+        self.electiveII_credits_needed = 11  # 专业选修II所需学分
         print(f"成功加载 {len(self.courses)} 门课程")
     
     def load_courses(self, filename):
@@ -30,10 +33,20 @@ class CourseSystem:
                     # 确保所有元素都是整数
                     year_list = [int(y) for y in year_list if str(y).isdigit()]
                     
+                    # 确定课程类型
+                    module = row['module']
+                    if module == "专业方向课":
+                        course_type = "专业选修I"
+                    elif module == "专业拓展课":
+                        course_type = "专业选修II"
+                    else:
+                        course_type = "必修课"
+
                     courses.append({
                         'id': row['course_id'],
                         'name': row['name'],
                         'module': row['module'],
+                        'type': course_type,
                         'credit': float(row['credit']),
                         'pressure': int(row['pressure']),
                         'year_available': year_list  # 确保是整数列表
