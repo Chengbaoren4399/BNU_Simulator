@@ -12,6 +12,11 @@ class Player:
         self.relationship = "单身"
         self.courses_taken = []
         self.selected_courses = []
+        self.required_credits = 0  # 必修课学分
+        self.electiveI_credits = 0  # 专业选修I学分
+        self.electiveII_credits = 0  # 专业选修II学分
+        # 添加压力警告标志
+        self.pressure_warning_shown = False
         
     def apply_effects(self, effects):
         for attr, value in effects.items():
