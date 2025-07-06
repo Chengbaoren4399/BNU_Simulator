@@ -6,7 +6,7 @@ import random
 
 class GameEngine:
     STATES = ["IDLE", "COURSE_SELECTION", "EVENT_HANDLING", "YEAR_END", "GAME_OVER"]
-    
+
     def __init__(self):
         self.player = Player()
         self.course_system = CourseSystem()
@@ -14,12 +14,14 @@ class GameEngine:
         self.state = "IDLE"
         self.current_event = None
         self.attribute_history = []
+        self.event_queue = []
         
     def start_new_game(self):
         self.player.reset()
         self.state = "COURSE_SELECTION"
         self.attribute_history = []
-        return "欢迎来到大学生活模拟器! 请选择本学期课程。"
+        self.event_queue = []
+        return "欢迎来到BNUer模拟器! 请选择本学期课程。"
     
     def select_courses(self, selected_courses):
         if not selected_courses:
@@ -33,22 +35,68 @@ class GameEngine:
         self.player.pressure += pressure_added
         self.player.courses_taken.extend([c['id'] for c in selected_courses])
         
-        self.state = "EVENT_HANDLING"
-        self.current_event = self.event_system.get_random_event(self.player.year)
-        self.record_attributes()
-        
-        return f"选课完成! 获得学分: {credits_earned}"
+        self.event_queue = self.event_system.get_non_repeating_events(self.player.year, 10)
+
+        if self.event_queue:
+            self.state = "EVENT_HANDLING"
+            self.current_event = self.event_queue.pop(0)  # 取出第一个事件
+            self.record_attributes()
+            return f"选课完成! 获得学分: {credits_earned}\n本学期将有10个事件需要处理!"
+        else:
+            self.state = "YEAR_END"
+            return f"选课完成! 获得学分: {credits_earned}\n本学期没有事件发生"
     
     def handle_event_choice(self, choice_idx):
         if not self.current_event or choice_idx >= len(self.current_event['choices']):
             return "无效选择!"
         
+        event_description = self.current_event['description']
         choice = self.current_event['choices'][choice_idx]
+
+        prev_health = self.player.health
+        prev_charm = self.player.charm
+        prev_wisdom = self.player.wisdom
+        prev_pressure = self.player.pressure
+
         self.player.apply_effects(choice['effects'])
         self.record_attributes()
+
+        #属性变化数值
+        health_change = self.player.health - prev_health
+        charm_change = self.player.charm - prev_charm
+        wisdom_change = self.player.wisdom - prev_wisdom
+        pressure_change = self.player.pressure - prev_pressure
         
-        self.state = "YEAR_END"
-        return f"事件处理完成: {choice['description']}"
+        changes = []
+        if health_change != 0:
+            changes.append(f"健康 {'+' if health_change > 0 else ''}{health_change}")
+        if charm_change != 0:
+            changes.append(f"魅力 {'+' if charm_change > 0 else ''}{charm_change}")
+        if wisdom_change != 0:
+            changes.append(f"智慧 {'+' if wisdom_change > 0 else ''}{wisdom_change}")
+        if pressure_change != 0:
+            changes.append(f"压力 {'+' if pressure_change > 0 else ''}{pressure_change}")
+        
+        # 关系变化
+        if "relationship" in choice['effects']:
+            changes.append(f"关系: {self.player.relationship}")
+        
+        # 格式化消息
+        message = f"事件: {event_description}\n"
+        message += f"你的选择: {choice['description']}"
+        if changes:
+            message += f"属性变化: {', '.join(changes)}\n"
+        else:
+            message += "没有属性变化\n"
+        
+        # 修改：检查队列中是否还有事件
+        if self.event_queue:
+            self.current_event = self.event_queue.pop(0)
+        else:
+            self.state = "YEAR_END"  # 确保状态正确更新
+            message+=f"本学期所有事件已处理完毕!\n"
+        
+        return message
     
     def next_year(self):
         self.player.next_year()
@@ -56,7 +104,9 @@ class GameEngine:
         
         if self.player.year > 4:
             return self.get_ending()
-        return f"进入大{self.player.year}学年!"
+        
+        num_trans = {1:"一",2:"二",3:"三",4:"四"}
+        return f"进入大{num_trans[self.player.year]}学年!"
     
     def get_available_courses(self):
         return self.course_system.get_available_courses(
