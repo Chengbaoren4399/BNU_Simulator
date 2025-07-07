@@ -149,6 +149,7 @@ class StudySimulatorGUI:
 
         return new_image
 
+    #生成属性进度条
     def create_attribute_bars(self):
         self.attribute_bars = {}
         attributes = ["健康", "魅力", "智慧", "压力"]
@@ -160,7 +161,6 @@ class StudySimulatorGUI:
             frame = ttk.Frame(attribute_container)
             frame.pack(pady=10, fill=tk.X)
 
-            # 使用Simhei字体
             label = ttk.Label(frame, text=f"{attr}: ", width=5, anchor="e", font=("Simhei", 12))
             label.pack(side=tk.LEFT, padx=(0, 5))
 
@@ -183,7 +183,6 @@ class StudySimulatorGUI:
         style.configure("Status.TLabel", background="#4871A1", foreground='#F5FFFA', 
                         font=('Simhei', 12), padding=2)
         
-        # 使用Simhei字体
         ttk.Label(self.status_frame, text=f"学年: 大{num_trans[p.year]}", style="Status.TLabel").pack(side=tk.LEFT, padx=10)
         ttk.Label(self.status_frame, text=f"学分: {p.credits}/{self.engine.course_system.total_credits_needed}", style="Status.TLabel").pack(side=tk.LEFT, padx=10)
         ttk.Label(self.status_frame, text=f"健康: {p.health}", style="Status.TLabel").pack(side=tk.LEFT, padx=10)
@@ -264,9 +263,17 @@ class StudySimulatorGUI:
             "压力": p.pressure
         }
 
+        max_values = {
+        "健康": 100,
+        "魅力": 100,
+        "智慧": 100,
+        "压力": 200  # 压力最大值为200
+        }
+
         for attr, value in attributes.items():
             bar = self.attribute_bars[attr]
-            bar["value"] = value
+            bar["maximum"] = max_values[attr]
+            bar["value"] = min(value, max_values[attr])#不超过最大值
         
     def add_log(self, message):
         self.log_text.config(state=tk.NORMAL)
@@ -308,9 +315,9 @@ class StudySimulatorGUI:
         self.clear_action_panel()
         
         # 使用Simhei字体
-        ttk.Label(self.action_frame, text="选择本学年课程:", font=("KT", 14, "bold")).pack(anchor="w", pady=10)
+        ttk.Label(self.action_frame, text="选择本学年课程:", font=("KaiTi", 14, "bold")).pack(anchor="w", pady=10)
 
-        loading_label = ttk.Label(self.action_frame, text="加载课程中...", font=("KT", 12))
+        loading_label = ttk.Label(self.action_frame, text="加载课程中...", font=("KaiTi", 12))
         loading_label.pack(pady=10)
         self.root.update()  # 刷新界面
         
@@ -318,7 +325,7 @@ class StudySimulatorGUI:
         loading_label.destroy()  # 移除加载提示
         
         if not available_courses:
-            ttk.Label(self.action_frame, text="本学期没有可选课程!", font=("KT", 12)).pack(pady=10)
+            ttk.Label(self.action_frame, text="本学期没有可选课程!", font=("KaiTi", 12)).pack(pady=10)
             return
         
         # 创建滚动区域
@@ -355,7 +362,7 @@ class StudySimulatorGUI:
             frame.pack(fill=tk.X, padx=5, pady=5)
             
             ttk.Checkbutton(frame, variable=var).pack(side=tk.LEFT, padx=5)
-            ttk.Label(frame, text=course['name'], width=25, anchor="w", font=("KT", 8)).pack(side=tk.LEFT)
+            ttk.Label(frame, text=course['name'], width=25, anchor="w", font=("KaiTi", 8)).pack(side=tk.LEFT)
             
             # 显示课程类型
             type_color = {
@@ -363,15 +370,15 @@ class StudySimulatorGUI:
                 "专业选修I": "blue",
                 "专业选修II": "green"
             }
-            type_label = ttk.Label(frame, text=course['type'], font=("KT", 8),width=10,
+            type_label = ttk.Label(frame, text=course['type'], font=("KaiTi", 8),width=10,
                                   foreground=type_color.get(course['type'], "black"))
             type_label.pack(side=tk.LEFT, padx=10)
 
-            ttk.Label(frame, text=f"模块: {course['module']}", font=("KT", 8),width=23).pack(side=tk.LEFT, padx=10)
+            ttk.Label(frame, text=f"模块: {course['module']}", font=("KaiTi", 8),width=23).pack(side=tk.LEFT, padx=10)
             years = ', '.join(map(str, course['year_available']))
-            ttk.Label(frame, text=f"开课学年: {years}", width=15, font=("KT", 8)).pack(side=tk.LEFT, padx=5)
-            ttk.Label(frame, text=f"学分: {course['credit']}", font=("KT", 8)).pack(side=tk.LEFT, padx=5)
-            ttk.Label(frame, text=f"压力: {course['pressure']}", font=("KT", 8)).pack(side=tk.LEFT, padx=5)
+            ttk.Label(frame, text=f"开课学年: {years}", width=15, font=("KaiTi", 8)).pack(side=tk.LEFT, padx=5)
+            ttk.Label(frame, text=f"学分: {course['credit']}", font=("KaiTi", 8)).pack(side=tk.LEFT, padx=5)
+            ttk.Label(frame, text=f"压力: {course['pressure']}", font=("KaiTi", 8)).pack(side=tk.LEFT, padx=5)
             
             self.course_vars[course['id']] = (var, course)
         
@@ -414,10 +421,10 @@ class StudySimulatorGUI:
             self.engine.state = "YEAR_END"
             return
         
-        ttk.Label(self.action_frame, text="事件:", font=("Simhei", 12, "bold")).pack(anchor="w", pady=10)
+        ttk.Label(self.action_frame, text="事件:", font=("KaiTi", 12, "bold")).pack(anchor="w", pady=10)
         ttk.Label(self.action_frame, text=event['description'], wraplength=500, 
-                 font=("Simhei", 12)).pack(anchor="w", pady=5)
-        ttk.Label(self.action_frame, text="选择:", font=("Simhei", 12, "bold")).pack(anchor="w", pady=10)
+                 font=("KaiTi", 12)).pack(anchor="w", pady=5)
+        ttk.Label(self.action_frame, text="选择:", font=("KaiTi", 12, "bold")).pack(anchor="w", pady=10)
 
         for i, choice in enumerate(event['choices']):
             btn = ttk.Button(
@@ -451,7 +458,7 @@ class StudySimulatorGUI:
     
     def show_game_over(self):
         self.clear_action_panel()
-        ttk.Label(self.action_frame, text="游戏结束!", font=("Simhei", 16, "bold")).pack(pady=10)
+        ttk.Label(self.action_frame, text="游戏结束!", font=("KaiTi", 16, "bold")).pack(pady=10)
         ending_text = self.engine.get_ending()
         frame = ttk.Frame(self.action_frame)
         frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
@@ -461,7 +468,7 @@ class StudySimulatorGUI:
         ending_textbox = tk.Text(
             frame, 
             wrap=tk.WORD, 
-            font=("Simhei", 12),
+            font=("KaiTi", 12),
             yscrollcommand=scrollbar.set,
             padx=10,
             pady=10,

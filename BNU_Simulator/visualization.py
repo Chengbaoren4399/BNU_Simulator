@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 import pandas as pd
-import numpy as np #
+import numpy as np # 我是洋芋饭
 
 class Visualization:
     def __init__(self):

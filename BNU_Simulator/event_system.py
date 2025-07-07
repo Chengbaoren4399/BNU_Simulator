@@ -36,5 +36,5 @@ class EventSystem:
         # 确保不超过可用事件总数
         count = min(count, len(applicable_events))
         
-        # 随机选择不重复事件
+        # 随机选择不重复的事件
         return random.sample(applicable_events, count)
