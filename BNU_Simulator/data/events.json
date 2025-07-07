@@ -18,7 +18,7 @@
     "choices": [
       {"description": "接受邀请", "effects": {"wisdom": 5, "pressure": 6}},
       {"description": "婉拒邀请", "effects": {"wisdom": -1, "pressure": -2}},
-      {"description": "尝试参与但中途退出", "effects": {"wisdom": 3, "pressure": 4}}
+      {"description": "尝试参与但中途退出", "effects": {"wisdom": 2, "pressure": 4}}
     ]
   },
   {
