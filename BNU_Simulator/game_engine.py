@@ -102,7 +102,7 @@ class GameEngine:
         else:
             message += "没有属性变化"
         
-        # 修改：检查队列中是否还有事件
+        # 检查队列中是否还有事件
         if self.event_queue:
             self.current_event = self.event_queue.pop(0)
         else:
